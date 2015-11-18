@@ -14,6 +14,7 @@ The virtualhost name it's gonna be the concatenation of the below variables: ito
   * Edit the hosts file to your host.
   * Change the variables in group_vars/all.
   * Run the ansible-playbook. Ex: ansible-playbook -b --ask-become-pass -k -i hosts site.yml (for running in localhost, with commom user over SSH).
+  * After the installation, runs http://yoursite.example.com/web and configure iTOP.
 
 ### Variables
   * itop_instance: name of the instance. 
