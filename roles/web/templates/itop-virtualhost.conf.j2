@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+    DocumentRoot "/var/www/itop{{ itop_instance }}.{{ domain }}/"
+    ServerName itop{{ itop_instance }}.{{ domain }}
+    ServerAlias itop{{ itop_instance }}.{{ domain }}
+
+    ErrorLog "/var/www/itop{{ itop_instance }}.{{ domain }}/logs/error.log"
+    CustomLog "/var/www/itop{{ itop_instance }}.{{ domain }}/logs/access.log" common
+
+    <Directory "/var/www/itop{{ itop_instance }}.{{ domain }}/">
+        Options Includes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+</VirtualHost>

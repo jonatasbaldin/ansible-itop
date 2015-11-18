@@ -1,0 +1,3 @@
+---
+- name: mariadb subrole
+  include: mariadb.yml

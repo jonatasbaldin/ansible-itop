@@ -1,0 +1,18 @@
+---
+- name: install apache
+  apt: name=apache2 force=yes
+
+#- name: configure php
+  
+- name: copy virtualhost template
+  template: src=itop-virtualhost.conf.j2 dest=/etc/apache2/sites-available/itop{{ itop_instance }}.{{ domain }}.conf
+
+- name: virtualhost symbolic link
+  file: src=/etc/apache2/sites-available/itop{{ itop_instance }}.{{ domain }}.conf dest=/etc/apache2/sites-enabled/itop{{ itop_instance }}.{{ domain }}.conf state=link
+
+- name: create virtualhost dir
+  file: name=/var/www/itop{{ itop_instance }}.{{ domain }} state=directory group=root owner=root
+
+- name: create log dir
+  file: name=/var/www/itop{{ itop_instance }}.{{ domain }}/logs state=directory group=root owner=root
+  notify: service apache

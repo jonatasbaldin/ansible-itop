@@ -1,0 +1,14 @@
+---
+- name: download itop
+  get_url: url=http://downloads.sourceforge.net/project/itop/itop/2.2.0/iTop-2.2.0-2459.zip dest=/usr/src/iTop-2.2.0-2459.zip
+
+- name: extract itop
+  unarchive: src=/usr/src/iTop-2.2.0-2459.zip dest=/var/www/itop{{ itop_instance }}.{{ domain }}
+
+- name: create necessary dirs
+  file: name={{ item }} owner=root group=www-data mode=0770 state=directory
+  with_items:
+    - /var/www/itop{{ itop_instance }}.{{ domain }}/web/log
+    - /var/www/itop{{ itop_instance }}.{{ domain }}/web/env-production
+    - /var/www/itop{{ itop_instance }}.{{ domain }}/web/conf
+    - /var/www/itop{{ itop_instance }}.{{ domain }}/web/data

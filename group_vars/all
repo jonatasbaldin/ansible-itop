@@ -1,0 +1,10 @@
+# instance name
+itop_instance: '' # empty for production env
+# domain name, is appended to the itop-instance
+domain: domain.example.com
+
+# mariadb vars
+dbname: itop
+dbuser: itop
+dbpassword: itop
+mariadb_rootpass: root

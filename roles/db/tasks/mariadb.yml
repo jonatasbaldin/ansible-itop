@@ -1,0 +1,19 @@
+---
+- name: install mariadb
+  apt: name=mariadb-server,mariadb-client force=yes
+  notify: service mariadb
+
+- name: start mariadb
+  service: name=mariadb state=started
+
+- name: change mariadb root password
+  mysql_user: name=root password={{ mariadb_rootpass }} 
+
+- name: change my.cnf (for root password)
+  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+- name: create mariadb database
+  mysql_db: name={{ dbname }} state=present 
+
+- name: create mariadb user
+  mysql_user: name={{ dbuser }} password={{ dbpassword }} priv={{ dbname }}.*:ALL  state=present
