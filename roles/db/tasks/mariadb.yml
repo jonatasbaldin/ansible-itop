@@ -4,7 +4,7 @@
   notify: service mariadb
 
 - name: start mariadb
-  service: name=mysqld state=started
+  service: name=mysql state=started
 
 - name: change mariadb root password
   mysql_user: name=root password={{ mariadb_rootpass }} 
