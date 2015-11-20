@@ -8,3 +8,7 @@ dbname: itop
 dbuser: itop
 dbpassword: itop
 mariadb_rootpass: root
+
+# modules
+install_module: True
+install_teemip: True

@@ -23,3 +23,5 @@ The virtualhost name it's gonna be the concatenation of the below variables: ito
   * dbuser: MariaDB user for accessing the database.
   * dbpassword: MariaDB users's password.
   * mariadb_rootpass: MariaDB root's password.
+  * install_teemip: Install or not TeemIP module.
+  * install_module: Add write permissions to itop-config.php for installing modules
