@@ -6,7 +6,7 @@
   unarchive: src=/usr/src/iTop-2.2.0-2459.zip dest=/var/www/itop{{ itop_instance }}.{{ domain }}
 
 - name: create necessary dirs
-  file: name={{ item }} owner=root group=www-data mode=0770 state=directory
+  file: name={{ item }} owner=root group=www-data mode=0775 state=directory recurse=yes
   with_items:
     - /var/www/itop{{ itop_instance }}.{{ domain }}/web/log
     - /var/www/itop{{ itop_instance }}.{{ domain }}/web/env-production
@@ -15,11 +15,11 @@
 
 - name: download teemip module
   get_url: url=http://downloads.sourceforge.net/project/teemip/teemip%20-%20an%20iTop%20module/2.0.2/TeemIp-Module-2.0.2.zip dest=/usr/src/TeemIp-Module-2.0.2.zip
-  when: install_teemip
+  when: install_module and install_teemip
 
 - name: extract teemip
-  unarchive: dest=/usr/src/TeemIp-Module-2.0.2.zip dest=/var/www//itop{{ itop_instance }}.{{ domain }}/web/extensions
-  when: install_teemip
+  unarchive: src=usr/src/TeemIp-Module-2.0.2.zip dest=/var/www//itop{{ itop_instance }}.{{ domain }}/web/extensions
+  when: install_module and install_teemip
 
 - name: verify if config-itop exists
   stat: path=/var/www//itop{{ itop_instance }}.{{ domain }}/web/conf/production/config-itop.php
@@ -28,4 +28,4 @@
 
 - name: add write to config-itop, to execute web/setup
   file: path=/var/www//itop{{ itop_instance }}.{{ domain }}/web/conf/production/config-itop.php mode="a+w"
-  when: config_itop.state.exists == True and install_module
+  when: install_module and config_itop.stat.exists == True
