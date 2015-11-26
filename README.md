@@ -8,8 +8,7 @@ This module was tested on Ubuntu 14.04.
 
 ### General Configuration
 
-This module was created with multiple virtualhosts in mind, to easily create fresh install for development (customization) of iTop.
-The virtualhost name it's gonna be the concatenation of the below variables: itop_instance+domain.
+  This module was refactore from the previous version, which accepted just virtualhosts. Now it can also be used with single web server purpose.
 
   * Edit the hosts file to your host.
   * Change the variables in group_vars/all.
@@ -17,8 +16,8 @@ The virtualhost name it's gonna be the concatenation of the below variables: ito
   * After the installation, runs http://yoursite.example.com/web and configure iTOP.
 
 ### Variables
-  * itop_instance: name of the instance. 
-  * domain: domain name.
+  * vhost: True to use vhost, False to not.
+  * fqdn: If using vhost, specifies the FQDN (itop.example.com).
   * dbname: MariaDB database for iTOP (do not use '-').
   * dbuser: MariaDB user for accessing the database.
   * dbpassword: MariaDB users's password.

@@ -3,14 +3,18 @@
   apt: name=apache2 force=yes
   
 - name: copy virtualhost template
-  template: src=itop-virtualhost.conf.j2 dest=/etc/apache2/sites-available/itop{{ itop_instance }}.{{ domain }}.conf
+  template: src=itop-virtualhost.conf.j2 dest=/etc/apache2/sites-available/{{ fqdn }}.conf
+  when: vhost
 
 - name: virtualhost symbolic link
-  file: src=/etc/apache2/sites-available/itop{{ itop_instance }}.{{ domain }}.conf dest=/etc/apache2/sites-enabled/itop{{ itop_instance }}.{{ domain }}.conf state=link
+  file: src=/etc/apache2/sites-available/{{ fqdn }}.conf dest=/etc/apache2/sites-enabled/{{ fqdn }}.conf state=link
+  when: vhost
 
 - name: create virtualhost dir
-  file: name=/var/www/itop{{ itop_instance }}.{{ domain }} state=directory group=root owner=root
+  file: name=/var/www/{{ fqdn }} state=directory group=root owner=root
+  when: vhost
 
 - name: create log dir
-  file: name=/var/www/itop{{ itop_instance }}.{{ domain }}/logs state=directory group=root owner=root
+  file: name=/var/www/{{ fqdn }}/logs state=directory group=root owner=root
+  when: vhost
   notify: service apache

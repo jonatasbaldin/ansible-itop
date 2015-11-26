@@ -1,7 +1,6 @@
-# instance name
-itop_instance: '' # empty for production env
-# domain name, is appended to the itop-instance
-domain: domain.example.com
+# use vhost?
+vhost: True # or False
+fqdn: itop.domain.example.com # if using vhost
 
 # mariadb vars
 dbname: itop
