@@ -1,0 +1,31 @@
+---
+- name: extract itop
+  unarchive: src=/usr/src/iTop-2.2.0-2459.zip dest=/var/www/html
+
+- name: create necessary dirs
+  file: name={{ item }} owner=root group=www-data mode=0775 state=directory recurse=yes
+  with_items:
+    - /var/www/html/web
+    - /var/www/html/web/log
+    - /var/www/html/web/env-production
+    - /var/www/html/web/conf
+    - /var/www/html/web/data
+
+- name: extract toolkit
+  unarchive: src=/usr/src/iTopDataModelToolkit-2.2.zip dest=/var/www/html/web
+
+- name: permissions on toolkit
+  file: name=/var/www/html/web/toolkit owner=root group=www-data mode=0775 state=directory recurse=yes
+
+- name: extract teemip
+  unarchive: src=/usr/src/TeemIp-Module-2.0.2.zip dest=/var/www/html/web/extensions
+  when: install_module and install_teemip
+
+- name: verify if config-itop exists
+  stat: path=/var/www/html/web/conf/production/config-itop.php
+  register: config_itop
+  when: install_module
+
+- name: add write to config-itop, to execute web/setup
+  file: path=/var/www/html/web/conf/production/config-itop.php mode="a+w"
+  when: install_module and config_itop.stat.exists == True
