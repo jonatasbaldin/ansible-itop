@@ -1,6 +1,6 @@
 ---
 - name: extract itop 
-  unarchive: src=/usr/src/iTop-2.2.0-2459.zip dest=/var/www/{{ fqdn }}
+  unarchive: src=/usr/src/iTop-2.2.0-2459.zip dest=/var/www/{{ fqdn }} copy=no
 
 - name: create necessary dirs
   file: name={{ item }} owner=root group=www-data mode=0775 state=directory recurse=yes
@@ -12,13 +12,13 @@
     - /var/www/{{ fqdn }}/web/data
 
 - name: extract toolkit 
-  unarchive: src=/usr/src/iTopDataModelToolkit-2.2.zip dest=/var/www/{{ fqdn }}/web
+  unarchive: src=/usr/src/iTopDataModelToolkit-2.2.zip dest=/var/www/{{ fqdn }}/web copy=no
 
 - name: permissions on toolkit 
   file: name=/var/www/{{ fqdn }}/web/toolkit owner=root group=www-data mode=0775 state=directory recurse=yes
 
 - name: extract teemip 
-  unarchive: src=/usr/src/TeemIp-Module-2.0.2.zip dest=/var/www/{{ fqdn }}/web/extensions
+  unarchive: src=/usr/src/TeemIp-Module-2.0.2.zip dest=/var/www/{{ fqdn }}/web/extensions copy=no
   when: install_module and install_teemip
 
 - name: verify if config-itop exists 

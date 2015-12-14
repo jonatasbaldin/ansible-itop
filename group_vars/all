@@ -1,5 +1,5 @@
 # use vhost?
-vhost: True # or False
+vhost: False # or False
 fqdn: itop.domain.example.com # if using vhost
 
 # mariadb vars
