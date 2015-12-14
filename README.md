@@ -13,6 +13,7 @@ This module was tested on Ubuntu 14.04.
   * Edit the hosts file to your host.
   * Change the variables in group_vars/all.
   * Run the ansible-playbook. Ex: ansible-playbook -b --ask-become-pass -k -i hosts site.yml (for running in localhost, with commom user over SSH).
+  * Or run with the existing Vagrant file, just make a 'vagrant up' in the directory.
   * After the installation, runs http://yoursite.example.com/web and configure iTOP.
 
 ### Variables
